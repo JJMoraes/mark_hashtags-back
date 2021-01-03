@@ -25,11 +25,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     auth.getDefaultUserDetailsService();
   }
 
+  //Comment here to disable JWT filter
   @Override
   protected void configure(HttpSecurity http) throws Exception {
     http.cors().and().csrf().disable().authorizeRequests().anyRequest().authenticated();
     http.addFilterBefore(new AuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
   }
+
+  //Uncomment here to disable JWT filter
+//  @Override
+//  protected void configure(HttpSecurity http) throws Exception {
+//    http.cors().and().csrf().disable().authorizeRequests().anyRequest().anonymous();
+//  }
 
   @Bean(name = BeanIds.AUTHENTICATION_MANAGER)
   @Override
