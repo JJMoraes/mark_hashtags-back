@@ -1,5 +1,6 @@
 package com.challenge.markhashtags.service;
 
+import com.challenge.markhashtags.collector.TweetCollector;
 import com.challenge.markhashtags.domain.Hashtag;
 import com.challenge.markhashtags.exception.specific.HashtagNotFoundException;
 import com.challenge.markhashtags.repository.HashtagRepository;
@@ -12,23 +13,25 @@ import java.util.List;
 @Service
 public class HashtagService {
 
-    private HashtagRepository hashtagRepository;
+  private HashtagRepository hashtagRepository;
+  private TweetCollector tweetCollector;
 
-    public Hashtag save(Hashtag hashtag){
-        return hashtagRepository.save(hashtag);
-    }
+  public Hashtag save(Hashtag hashtag) {
+    Hashtag createdHashtag = hashtagRepository.save(hashtag);
+    tweetCollector.collectFirstTweets(createdHashtag);
+    return createdHashtag;
+  }
 
-    public Hashtag getById(Long id){
-        return hashtagRepository.findById(id).orElseThrow(HashtagNotFoundException::new);
-    }
+  public Hashtag getById(Long id) {
+    return hashtagRepository.findById(id).orElseThrow(HashtagNotFoundException::new);
+  }
 
-    public List<Hashtag> getAllByOwnerId(Long id){
-        return hashtagRepository.findAllByOwnerId(id);
-    }
+  public List<Hashtag> getAllByOwnerId(Long id) {
+    return hashtagRepository.findAllByOwnerId(id);
+  }
 
-    public void delete(Long id){
-        Hashtag hashtag = getById(id);
-        hashtagRepository.delete(hashtag);
-    }
-
+  public void delete(Long id) {
+    Hashtag hashtag = getById(id);
+    hashtagRepository.delete(hashtag);
+  }
 }
