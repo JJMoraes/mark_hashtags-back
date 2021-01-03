@@ -4,7 +4,7 @@ import com.challenge.markhashtags.auth.dto.AccessTokenDTO;
 import com.challenge.markhashtags.auth.dto.RequestTokenResponseDTO;
 import com.challenge.markhashtags.auth.TwitterAuthentication;
 import com.challenge.markhashtags.domain.User;
-import com.challenge.markhashtags.exception.especific.UserNotFoundException;
+import com.challenge.markhashtags.exception.specific.UserNotFoundException;
 import com.challenge.markhashtags.repository.UserRepository;
 import com.challenge.markhashtags.security.JwtManager;
 import lombok.AllArgsConstructor;

@@ -1,8 +1,7 @@
 package com.challenge.markhashtags.service;
 
 import com.challenge.markhashtags.domain.Hashtag;
-import com.challenge.markhashtags.domain.User;
-import com.challenge.markhashtags.exception.especific.HashtagNotFoundException;
+import com.challenge.markhashtags.exception.specific.HashtagNotFoundException;
 import com.challenge.markhashtags.repository.HashtagRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;

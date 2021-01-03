@@ -1,4 +1,4 @@
-package com.challenge.markhashtags.exception.especific;
+package com.challenge.markhashtags.exception.specific;
 
 import com.challenge.markhashtags.exception.BadRequestException;
 

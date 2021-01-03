@@ -2,7 +2,7 @@ package com.challenge.markhashtags.service;
 
 import com.challenge.markhashtags.domain.Hashtag;
 import com.challenge.markhashtags.domain.User;
-import com.challenge.markhashtags.exception.especific.HashtagNotFoundException;
+import com.challenge.markhashtags.exception.specific.HashtagNotFoundException;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;

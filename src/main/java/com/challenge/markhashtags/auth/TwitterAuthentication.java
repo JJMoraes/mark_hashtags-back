@@ -1,7 +1,7 @@
 package com.challenge.markhashtags.auth;
 
 import com.challenge.markhashtags.exception.InternalServerErrorException;
-import com.challenge.markhashtags.exception.especific.BadCredentialsException;
+import com.challenge.markhashtags.exception.specific.BadCredentialsException;
 import com.challenge.markhashtags.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.core.env.Environment;

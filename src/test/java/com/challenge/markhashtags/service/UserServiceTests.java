@@ -2,7 +2,7 @@ package com.challenge.markhashtags.service;
 
 import com.challenge.markhashtags.auth.dto.RequestTokenResponseDTO;
 import com.challenge.markhashtags.domain.User;
-import com.challenge.markhashtags.exception.especific.UserNotFoundException;
+import com.challenge.markhashtags.exception.specific.UserNotFoundException;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
