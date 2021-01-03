@@ -4,7 +4,7 @@ import com.challenge.markhashtags.exception.NotFoundException;
 
 public class HashtagNotFoundException extends NotFoundException {
 
-    public HashtagNotFoundException() {
-        super("Hashtag not found !");
-    }
+  public HashtagNotFoundException() {
+    super("Hashtag not found !");
+  }
 }

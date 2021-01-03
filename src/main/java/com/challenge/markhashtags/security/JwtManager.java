@@ -16,17 +16,17 @@ public class JwtManager {
     Calendar calendar = Calendar.getInstance();
     calendar.add(Calendar.DAY_OF_MONTH, SecurityConstants.JWT_EXP_DAYS);
     return Jwts.builder()
-            .setSubject(user.getEmail())
-            .claim("id", user.getId())
-            .setExpiration(calendar.getTime())
-            .signWith(SignatureAlgorithm.HS512, SecurityConstants.API_KEY.getBytes())
-            .compact();
+        .setSubject(user.getEmail())
+        .claim("id", user.getId())
+        .setExpiration(calendar.getTime())
+        .signWith(SignatureAlgorithm.HS512, SecurityConstants.API_KEY.getBytes())
+        .compact();
   }
 
   public Claims parseToken(String jwt) throws JwtException {
     return Jwts.parser()
-            .setSigningKey(SecurityConstants.API_KEY.getBytes())
-            .parseClaimsJws(jwt)
-            .getBody();
+        .setSigningKey(SecurityConstants.API_KEY.getBytes())
+        .parseClaimsJws(jwt)
+        .getBody();
   }
 }

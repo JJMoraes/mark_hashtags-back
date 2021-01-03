@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public interface TweetRepository extends JpaRepository<Tweet, Long> {
 
-    public List<Tweet> findAllByHashtagIdOrderByIdDesc(Long id);
+  public List<Tweet> findAllByHashtagIdOrderByIdDesc(Long id);
 
-    public Optional<Tweet> findTopByHashtagIdOrderByIdDesc(Long id);
+  public Optional<Tweet> findTopByHashtagIdOrderByIdDesc(Long id);
 }

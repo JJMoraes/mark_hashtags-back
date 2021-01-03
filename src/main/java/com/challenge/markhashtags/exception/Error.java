@@ -1,6 +1,5 @@
 package com.challenge.markhashtags.exception;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,9 +12,8 @@ import java.util.List;
 @Data
 public class Error {
 
-    private int code;
-    private String msg;
-    private Date date;
-    private List<String> errors;
+  private int code;
+  private String msg;
+  private Date date;
+  private List<String> errors;
 }
-

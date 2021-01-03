@@ -16,19 +16,18 @@ import java.util.List;
 @Entity
 public class Hashtag implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
-    @Column(length = 100, nullable = false)
-    private String title;
+  @Column(length = 100, nullable = false)
+  private String title;
 
-    @ManyToOne
-    @JoinColumn(name = "owner_id", nullable = false)
-    private User owner;
+  @ManyToOne
+  @JoinColumn(name = "owner_id", nullable = false)
+  private User owner;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "hashtag", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Tweet> tweets = new ArrayList<>();
-
+  @JsonIgnore
+  @OneToMany(mappedBy = "hashtag", cascade = CascadeType.ALL, orphanRemoval = true)
+  private List<Tweet> tweets = new ArrayList<>();
 }

@@ -14,14 +14,13 @@ import javax.validation.constraints.NotNull;
 @Data
 public class HashtagSaveDTO {
 
-    @NotBlank(message = "The title of hashtag can't be blank")
-    private String title;
+  @NotBlank(message = "The title of hashtag can't be blank")
+  private String title;
 
-    @NotNull(message = "The owner can't be null")
-    private User owner;
+  @NotNull(message = "The owner can't be null")
+  private User owner;
 
-    public Hashtag toHashtag(){
-        return new Hashtag(null, this.title, this.owner, null);
-    }
-
+  public Hashtag toHashtag() {
+    return new Hashtag(null, this.title, this.owner, null);
+  }
 }

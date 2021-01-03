@@ -7,6 +7,5 @@ import java.util.List;
 
 public interface HashtagRepository extends JpaRepository<Hashtag, Long> {
 
-    public List<Hashtag> findAllByOwnerId(Long id);
-
+  public List<Hashtag> findAllByOwnerId(Long id);
 }

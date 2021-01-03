@@ -11,17 +11,17 @@ import java.util.List;
 @Service
 public class TweetService {
 
-    private TweetRepository tweetRepository;
+  private TweetRepository tweetRepository;
 
-    public Tweet save(Tweet tweet){
-        return tweetRepository.save(tweet);
-    }
+  public Tweet save(Tweet tweet) {
+    return tweetRepository.save(tweet);
+  }
 
-    public List<Tweet> getAllByHashtagId(Long id){
-        return tweetRepository.findAllByHashtagIdOrderByIdDesc(id);
-    }
+  public List<Tweet> getAllByHashtagId(Long id) {
+    return tweetRepository.findAllByHashtagIdOrderByIdDesc(id);
+  }
 
-    public Tweet getLastByHashtagId(Long id) {
-        return tweetRepository.findTopByHashtagIdOrderByIdDesc(id).orElse(null);
-    }
+  public Tweet getLastByHashtagId(Long id) {
+    return tweetRepository.findTopByHashtagIdOrderByIdDesc(id).orElse(null);
+  }
 }

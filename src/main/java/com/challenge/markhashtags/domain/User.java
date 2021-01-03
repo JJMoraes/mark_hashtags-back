@@ -16,18 +16,17 @@ import java.util.List;
 @Entity
 public class User implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
-    @Column(length = 100, nullable = false, unique = true)
-    private String email;
+  @Column(length = 100, nullable = false, unique = true)
+  private String email;
 
-    @Column(length = 100, nullable = false)
-    private String username;
+  @Column(length = 100, nullable = false)
+  private String username;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "owner")
-    private List<Hashtag> hashtags = new ArrayList<>();
-
+  @JsonIgnore
+  @OneToMany(mappedBy = "owner")
+  private List<Hashtag> hashtags = new ArrayList<>();
 }

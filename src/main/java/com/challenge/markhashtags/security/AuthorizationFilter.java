@@ -11,6 +11,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
+
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -27,8 +28,9 @@ public class AuthorizationFilter extends OncePerRequestFilter {
       HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
       throws ServletException, IOException {
     String jwt = request.getHeader(HttpHeaders.AUTHORIZATION);
-    if (jwt == null || !jwt.startsWith(SecurityConstants.JWT_PROVIDER)){
-      Error error = new Error(HttpStatus.UNAUTHORIZED.value(), "Invalid JWT token", new Date(), null);
+    if (jwt == null || !jwt.startsWith(SecurityConstants.JWT_PROVIDER)) {
+      Error error =
+          new Error(HttpStatus.UNAUTHORIZED.value(), "Invalid JWT token", new Date(), null);
       PrintWriter writer = response.getWriter();
 
       ObjectMapper mapper = new ObjectMapper();
@@ -44,7 +46,8 @@ public class AuthorizationFilter extends OncePerRequestFilter {
       Claims claims = new JwtManager().parseToken(jwt);
       String email = claims.getSubject();
       Authentication authentication =
-              new UsernamePasswordAuthenticationToken(email, null, AuthorityUtils.createAuthorityList("ROLE_USER"));
+          new UsernamePasswordAuthenticationToken(
+              email, null, AuthorityUtils.createAuthorityList("ROLE_USER"));
       SecurityContextHolder.getContext().setAuthentication(authentication);
     } catch (Exception e) {
       Error error = new Error(HttpStatus.UNAUTHORIZED.value(), e.getMessage(), new Date(), null);

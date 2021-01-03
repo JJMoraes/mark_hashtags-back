@@ -4,7 +4,7 @@ import com.challenge.markhashtags.exception.NotFoundException;
 
 public class UserNotFoundException extends NotFoundException {
 
-    public UserNotFoundException() {
-        super("User not found !");
-    }
+  public UserNotFoundException() {
+    super("User not found !");
+  }
 }

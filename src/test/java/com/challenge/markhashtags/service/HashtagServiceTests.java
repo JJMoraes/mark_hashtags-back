@@ -19,36 +19,35 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest
 public class HashtagServiceTests {
 
-    @Autowired HashtagService hashtagService;
-    @Autowired UserService userService;
+  @Autowired HashtagService hashtagService;
+  @Autowired UserService userService;
 
-    @Test
-    public void saveTest(){
-        User user = userService.getById(1L);
-        Hashtag newHashtag = new Hashtag(null, "#TesteMagrathea", user, null);
-        Hashtag hashtag = hashtagService.save(newHashtag);
-        assertThat(hashtag.getTitle()).isEqualTo("#TesteMagrathea");
-    }
+  @Test
+  public void saveTest() {
+    User user = userService.getById(1L);
+    Hashtag newHashtag = new Hashtag(null, "#TesteMagrathea", user, null);
+    Hashtag hashtag = hashtagService.save(newHashtag);
+    assertThat(hashtag.getTitle()).isEqualTo("#TesteMagrathea");
+  }
 
-    @Test
-    public void getByIdTest(){
-        Hashtag hashtag = hashtagService.getById(1L);
-        assertThat(hashtag.getTitle()).isEqualTo("#SAOxGRE");
-    }
+  @Test
+  public void getByIdTest() {
+    Hashtag hashtag = hashtagService.getById(1L);
+    assertThat(hashtag.getTitle()).isEqualTo("#SAOxGRE");
+  }
 
-    @Test
-    public void getAllByUserIdTest(){
-        List<Hashtag> hashtags = hashtagService.getAllByOwnerId(1L);
-        assertThat(hashtags.size()).isGreaterThan(0);
-    }
+  @Test
+  public void getAllByUserIdTest() {
+    List<Hashtag> hashtags = hashtagService.getAllByOwnerId(1L);
+    assertThat(hashtags.size()).isGreaterThan(0);
+  }
 
-    @Test(expected = HashtagNotFoundException.class)
-    public void deleteTest(){
-        User user = userService.getById(1L);
-        Hashtag newHashtag = new Hashtag(null, "#DeleteTeste", user, null);
-        Hashtag hashtag = hashtagService.save(newHashtag);
-        hashtagService.delete(hashtag.getId());
-        hashtagService.getById(hashtag.getId());
-    }
-
+  @Test(expected = HashtagNotFoundException.class)
+  public void deleteTest() {
+    User user = userService.getById(1L);
+    Hashtag newHashtag = new Hashtag(null, "#DeleteTeste", user, null);
+    Hashtag hashtag = hashtagService.save(newHashtag);
+    hashtagService.delete(hashtag.getId());
+    hashtagService.getById(hashtag.getId());
+  }
 }

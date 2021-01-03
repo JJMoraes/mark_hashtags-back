@@ -8,16 +8,9 @@ import javax.validation.constraints.NotNull;
 @Data
 public class AccessTokenDTO {
 
-    @NotNull
-    @NotBlank
-    private String oauth_token;
+  @NotNull @NotBlank private String oauth_token;
 
-    @NotNull
-    @NotBlank
-    private String oauth_tokenSecret;
+  @NotNull @NotBlank private String oauth_tokenSecret;
 
-    @NotNull
-    @NotBlank
-    private String oauth_verifier;
-
+  @NotNull @NotBlank private String oauth_verifier;
 }

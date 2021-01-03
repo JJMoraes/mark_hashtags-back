@@ -18,41 +18,41 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest
 public class UserRepositoryTests {
 
-    @Autowired UserRepository userRepository;
+  @Autowired UserRepository userRepository;
 
-    @Test
-    public void saveTest(){
-        User newUser = new User(null, "jean@gmail.com", "jeanklose", null);
-        User createdUser = userRepository.save(newUser);
-        assertThat(createdUser.getUsername()).isEqualTo("jeanklose");
-    }
+  @Test
+  public void saveTest() {
+    User newUser = new User(null, "jean@gmail.com", "jeanklose", null);
+    User createdUser = userRepository.save(newUser);
+    assertThat(createdUser.getUsername()).isEqualTo("jeanklose");
+  }
 
-    @Test
-    public void findByIdTest(){
-        Optional<User> result = userRepository.findById(1L);
-        User user = result.get();
-        assertThat(user.getUsername()).isEqualTo("jeanklose");
-    }
+  @Test
+  public void findByIdTest() {
+    Optional<User> result = userRepository.findById(1L);
+    User user = result.get();
+    assertThat(user.getUsername()).isEqualTo("jeanklose");
+  }
 
-    @Test
-    public void findByEmailTest(){
-        Optional<User> result = userRepository.findByEmail("jean@gmail.com");
-        User user = result.get();
-        assertThat(user.getUsername()).isEqualTo("jeanklose");
-    }
+  @Test
+  public void findByEmailTest() {
+    Optional<User> result = userRepository.findByEmail("jean@gmail.com");
+    User user = result.get();
+    assertThat(user.getUsername()).isEqualTo("jeanklose");
+  }
 
-    @Test
-    public void findAllTest(){
-        List<User> users = userRepository.findAll();
-        assertThat(users.size()).isGreaterThan(0);
-    }
+  @Test
+  public void findAllTest() {
+    List<User> users = userRepository.findAll();
+    assertThat(users.size()).isGreaterThan(0);
+  }
 
-    @Test
-    public void deleteTest(){
-        User newUser = new User(null, "userdelete@gmail.com", "userdelete", null);
-        User createdUser = userRepository.save(newUser);
-        userRepository.delete(createdUser);
-        Optional<User> user = userRepository.findById(createdUser.getId());
-        assertThat(user.isPresent()).isFalse();
-    }
+  @Test
+  public void deleteTest() {
+    User newUser = new User(null, "userdelete@gmail.com", "userdelete", null);
+    User createdUser = userRepository.save(newUser);
+    userRepository.delete(createdUser);
+    Optional<User> user = userRepository.findById(createdUser.getId());
+    assertThat(user.isPresent()).isFalse();
+  }
 }

@@ -15,24 +15,23 @@ import javax.validation.Valid;
 @RestController
 public class UserResource {
 
-    private UserService userService;
+  private UserService userService;
 
-    @GetMapping("/login")
-    public ResponseEntity<RequestTokenResponseDTO> login(){
-        RequestTokenResponseDTO urlLogin = userService.login();
-        return ResponseEntity.ok(urlLogin);
-    }
+  @GetMapping("/login")
+  public ResponseEntity<RequestTokenResponseDTO> login() {
+    RequestTokenResponseDTO urlLogin = userService.login();
+    return ResponseEntity.ok(urlLogin);
+  }
 
-    @PostMapping("/sign")
-    public ResponseEntity<String> sign(@Valid @RequestBody AccessTokenDTO accessDTO){
-        String string = userService.sign(accessDTO);
-        return ResponseEntity.ok(string);
-    }
+  @PostMapping("/sign")
+  public ResponseEntity<String> sign(@Valid @RequestBody AccessTokenDTO accessDTO) {
+    String string = userService.sign(accessDTO);
+    return ResponseEntity.ok(string);
+  }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<User> getById(@PathVariable("id")Long id){
-        User user = userService.getById(id);
-        return ResponseEntity.ok(user);
-    }
-
+  @GetMapping("/{id}")
+  public ResponseEntity<User> getById(@PathVariable("id") Long id) {
+    User user = userService.getById(id);
+    return ResponseEntity.ok(user);
+  }
 }
