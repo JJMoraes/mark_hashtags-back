@@ -1,5 +1,6 @@
 package com.challenge.markhashtags.resource;
 
+import com.challenge.markhashtags.collector.TweetCollector;
 import com.challenge.markhashtags.domain.Hashtag;
 import com.challenge.markhashtags.domain.Tweet;
 import com.challenge.markhashtags.resource.dto.HashtagSaveDTO;
@@ -20,11 +21,13 @@ public class HashtagResource {
 
   private final HashtagService hashtagService;
   private final TweetService tweetService;
+  private final TweetCollector tweetCollector;
 
   @PostMapping()
   public ResponseEntity<Hashtag> save(@Valid @RequestBody HashtagSaveDTO hashtagDTO) {
     Hashtag hashtag = hashtagDTO.toHashtag();
     Hashtag createdHashtag = hashtagService.save(hashtag);
+    tweetCollector.collectFirstTweets(createdHashtag);
     return ResponseEntity.status(HttpStatus.CREATED).body(createdHashtag);
   }
 

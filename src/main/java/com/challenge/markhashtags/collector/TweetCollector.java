@@ -60,7 +60,6 @@ public class TweetCollector {
       if (lastTweet != null) query.setSinceId(lastTweet.getTweetId());
       Twitter twitter = twitterAuthentication.requestAuthenticatedTwitter();
       QueryResult results = twitter.search(query);
-      System.out.println(results);
       return results.getTweets();
     } catch (TwitterException ex) {
       return null;
