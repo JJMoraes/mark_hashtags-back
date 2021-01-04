@@ -51,8 +51,7 @@ public class UserService {
         (result.isPresent())
             ? result.get()
             : save(new User(null, twitterUser.getEmail(), twitterUser.getScreenName(), null));
-    String token = jwtManager.createToken(user);
-    return token;
+    return jwtManager.createToken(user);
   }
 
   public List<User> getAll() {

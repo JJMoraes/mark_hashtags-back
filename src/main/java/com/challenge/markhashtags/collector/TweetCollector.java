@@ -4,6 +4,7 @@ import com.challenge.markhashtags.auth.TwitterAuthentication;
 import com.challenge.markhashtags.domain.Hashtag;
 import com.challenge.markhashtags.domain.Tweet;
 import com.challenge.markhashtags.domain.User;
+import com.challenge.markhashtags.exception.InternalServerErrorException;
 import com.challenge.markhashtags.service.HashtagService;
 import com.challenge.markhashtags.service.TweetService;
 import com.challenge.markhashtags.service.UserService;
@@ -26,6 +27,7 @@ public class TweetCollector {
   private final TweetService tweetService;
   private final TwitterAuthentication twitterAuthentication;
 
+  //Every 10 minutes
   @Scheduled(cron = "0 0/10 * * * *")
   public void collectPeriodicTweets() {
     List<User> users = userService.getAll();
@@ -35,7 +37,6 @@ public class TweetCollector {
       for (Hashtag hashtag : hashtags) {
         Tweet lastTweet = tweetService.getLastByHashtagId(hashtag.getId());
         List<Status> tweets = collectTweets(hashtag.getTitle(), lastTweet);
-        if (tweets == null) continue;
         Collections.reverse(tweets);
         for (Status tweet : tweets) {
           tweetService.save(
@@ -62,14 +63,13 @@ public class TweetCollector {
       QueryResult results = twitter.search(query);
       return results.getTweets();
     } catch (TwitterException ex) {
-      return null;
+      throw new InternalServerErrorException("Can't communicate with the Twitter API");
     }
   }
 
   public void collectFirstTweets(Hashtag hashtag) {
     DateFormat dateFormat = new SimpleDateFormat("E, MMMM dd, yyyy hh:mm:ss a");
     List<Status> tweets = collectTweets(hashtag.getTitle(), null);
-    if (tweets == null) return;
     Collections.reverse(tweets);
     for (Status tweet : tweets) {
       tweetService.save(

@@ -28,10 +28,8 @@ public class TwitterAuthentication {
         .setOAuthConsumerKey(env.getProperty("twitter.consumer.key"))
         .setOAuthConsumerSecret(env.getProperty("twitter.consumer.secret"))
         .setIncludeEmailEnabled(true);
-
     TwitterFactory factory = new TwitterFactory(builder.build());
-    Twitter twitter = factory.getInstance();
-    return twitter;
+    return factory.getInstance();
   }
 
   public RequestToken requestAuthorizationToken() {
@@ -49,8 +47,7 @@ public class TwitterAuthentication {
       RequestToken request = new RequestToken(oauth_token, oauth_tokenSecret);
       AccessToken accessToken = twitter.getOAuthAccessToken(request, oauth_verifier);
       twitter.setOAuthAccessToken(accessToken);
-      User user = twitter.verifyCredentials();
-      return user;
+      return twitter.verifyCredentials();
     } catch (TwitterException ex) {
       throw new BadCredentialsException();
     }
@@ -65,7 +62,6 @@ public class TwitterAuthentication {
         .setOAuthAccessToken(env.getProperty("twitter.access"))
         .setOAuthAccessTokenSecret(env.getProperty("twitter.access.secret"));
     TwitterFactory factory = new TwitterFactory(builder.build());
-    Twitter twitter = factory.getInstance();
-    return twitter;
+    return factory.getInstance();
   }
 }
