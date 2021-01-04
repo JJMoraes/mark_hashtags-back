@@ -1,6 +1,8 @@
 package com.challenge.markhashtags.repository;
 
+import com.challenge.markhashtags.domain.Hashtag;
 import com.challenge.markhashtags.domain.User;
+import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,23 +24,23 @@ public class UserRepositoryTests {
 
   @Test
   public void saveTest() {
-    User newUser = new User(null, "jean@gmail.com", "jeanklose", null);
-    User createdUser = userRepository.save(newUser);
-    assertThat(createdUser.getUsername()).isEqualTo("jeanklose");
+    User createdUser = userRepository.save(new User(null, "saveuser1@gmail.com", "saveuser1", null));
+    assertThat(createdUser.getUsername()).isEqualTo("saveuser1");
   }
 
   @Test
   public void findByIdTest() {
-    Optional<User> result = userRepository.findById(1L);
-    User user = result.get();
-    assertThat(user.getUsername()).isEqualTo("jeanklose");
+    User createdUser = userRepository.save(new User(null, "saveuser2@gmail.com", "saveuser2", null));
+    Optional<User> resultUser = userRepository.findById(createdUser.getId());
+    User user = resultUser.get();
+    assertThat(user.getUsername()).isEqualTo("saveuser2");
   }
 
   @Test
   public void findByEmailTest() {
-    Optional<User> result = userRepository.findByEmail("jean@gmail.com");
+    Optional<User> result = userRepository.findByEmail("saveuser1@gmail.com");
     User user = result.get();
-    assertThat(user.getUsername()).isEqualTo("jeanklose");
+    assertThat(user.getUsername()).isEqualTo("saveuser1");
   }
 
   @Test

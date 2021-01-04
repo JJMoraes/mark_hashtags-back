@@ -23,22 +23,22 @@ public class UserServiceTests {
 
   @Test
   public void saveTest() {
-    User newUser = new User(null, "joaquim@gmail.com", "joaquim", null);
-    User createdUser = userService.save(newUser);
-    assertThat(createdUser.getUsername()).isEqualTo("joaquim");
+    User createdUser = userService.save(new User(null, "saveuser3@gmail.com", "saveuser3", null));
+    assertThat(createdUser.getUsername()).isEqualTo("saveuser3");
   }
 
   @Test
   public void getByIdTest() {
-    User user = userService.getById(1L);
-    assertThat(user.getUsername()).isEqualTo("jeanklose");
+    User createdUser = userService.save(new User(null, "saveuser4@gmail.com", "saveuser4", null));
+    User user = userService.getById(createdUser.getId());
+    assertThat(user.getUsername()).isEqualTo("saveuser4");
   }
 
   @Test
   public void getByEmailTest() {
-    Optional<User> result = userService.getByEmail("jean@gmail.com");
-    User user = result.get();
-    assertThat(user.getUsername()).isEqualTo("jeanklose");
+    Optional<User> resultUser = userService.getByEmail("saveuser1@gmail.com");
+    User user = resultUser.get();
+    assertThat(user.getUsername()).isEqualTo("saveuser1");
   }
 
   @Test
@@ -49,7 +49,7 @@ public class UserServiceTests {
 
   @Test(expected = UserNotFoundException.class)
   public void getByIdErrorTest() {
-    userService.getById(2L);
+    userService.getById(111111111L);
   }
 
   @Test

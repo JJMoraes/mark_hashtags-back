@@ -2,8 +2,10 @@ package com.challenge.markhashtags.repository;
 
 import com.challenge.markhashtags.domain.Hashtag;
 import com.challenge.markhashtags.domain.User;
+import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -22,36 +24,46 @@ public class HashtagRepositoryTests {
   @Autowired HashtagRepository hashtagRepository;
   @Autowired UserRepository userRepository;
 
+  @Before
+  public void startUser(){
+    Optional<User> resultUser = userRepository.findByEmail("saveuser1@gmail.com");
+    if(!resultUser.isPresent())
+      userRepository.save(new User(null, "saveuser1@gmail.com", "saveuser1", null));
+  }
+
   @Test
   public void saveTest() {
-    Optional<User> result = userRepository.findById(1L);
-    User user = result.get();
-    Hashtag newHashtag = new Hashtag(null, "#SAOxGRE", user, null);
-    Hashtag hashtag = hashtagRepository.save(newHashtag);
-    assertThat(hashtag.getTitle()).isEqualTo("#SAOxGRE");
+    Optional<User> resultUser = userRepository.findByEmail("saveuser1@gmail.com");
+    User user = resultUser.get();
+    Hashtag createdHashtag = hashtagRepository.save(new Hashtag(null, "#TesteMagrathea", user, null));
+    assertThat(createdHashtag.getTitle()).isEqualTo("#TesteMagrathea");
   }
 
   @Test
   public void findByIdTest() {
-    Optional<Hashtag> result = hashtagRepository.findById(1L);
-    Hashtag hashtag = result.get();
-    assertThat(hashtag.getTitle()).isEqualTo("#SAOxGRE");
+    Optional<User> resultUser = userRepository.findByEmail("saveuser1@gmail.com");
+    User user = resultUser.get();
+    Hashtag createdHashtag = hashtagRepository.save(new Hashtag(null, "#TesteMagrathea2", user, null));
+    Optional<Hashtag> resultHashtag = hashtagRepository.findById(createdHashtag.getId());
+    Hashtag hashtag = resultHashtag.get();
+    assertThat(hashtag.getTitle()).isEqualTo("#TesteMagrathea2");
   }
 
   @Test
   public void findAllByUserIdTest() {
-    List<Hashtag> hashtags = hashtagRepository.findAllByOwnerId(1L);
+    Optional<User> resultUser = userRepository.findByEmail("saveuser1@gmail.com");
+    User user = resultUser.get();
+    List<Hashtag> hashtags = hashtagRepository.findAllByOwnerId(user.getId());
     assertThat(hashtags.size()).isGreaterThan(0);
   }
 
   @Test
   public void deleteTest() {
-    Optional<User> result = userRepository.findById(1L);
-    User user = result.get();
-    Hashtag newHashtag = new Hashtag(null, "#DeleteTeste", user, null);
-    Hashtag hashtag = hashtagRepository.save(newHashtag);
-    hashtagRepository.delete(hashtag);
-    Optional<Hashtag> deletedHashtag = hashtagRepository.findById(hashtag.getId());
+    Optional<User> resultUser = userRepository.findByEmail("saveuser1@gmail.com");
+    User user = resultUser.get();
+    Hashtag createdHashtag = hashtagRepository.save(new Hashtag(null, "#DeleteTeste", user, null));
+    hashtagRepository.delete(createdHashtag);
+    Optional<Hashtag> deletedHashtag = hashtagRepository.findById(createdHashtag.getId());
     assertThat(deletedHashtag.isPresent()).isFalse();
   }
 }
