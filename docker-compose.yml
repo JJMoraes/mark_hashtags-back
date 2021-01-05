@@ -1,0 +1,28 @@
+version: "3.3"
+
+services:
+  mysql-markdocker:
+    image: mysql:5.7
+    environment:
+      - MYSQL_ROOT_PASSWORD=123
+      - MYSQL_DATABASE=mark_hashtags
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=123
+    expose:
+      - 3306
+
+  myapp:
+    image: springio/gs-spring-boot-docker:latest
+    restart: on-failure
+    links:
+      - mysql-markdocker
+    depends_on:
+      - mysql-markdocker
+    ports:
+      - 8080:8080
+    environment:
+      - DATABASE_HOST=mysql-markdocker
+      - DATABASE_USER=root
+      - DATABASE_PASSWORD=123
+      - DATABASE_NAME=mark_hashtags
+      - DATABASE_PORT=3306
