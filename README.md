@@ -58,6 +58,7 @@
 ### Run with Docker 
 
 > First you'll need to install the [docker](https://docs.docker.com/engine/install/) +19.03 and [docker-compose](https://docs.docker.com/compose/install/) +1.17 
+> Second you'll need to install the [Maven](https://maven.apache.org/download.cgi) +3.6.
 
 ``` cd mark_hashtags-back ```
 
