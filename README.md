@@ -43,7 +43,7 @@
 
 #### Run Spring Boot
 
-``` cd mark_hashtags_back ```
+``` cd mark_hashtags-back ```
 
 ``` mvn spring-boot:run ```
 
@@ -59,11 +59,15 @@
 
 > First you'll need to install the [docker](https://docs.docker.com/engine/install/) +19.03 and [docker-compose](https://docs.docker.com/compose/install/) +1.17 
 
-``` cd mark_hashtags_back ```
+``` cd mark_hashtags-back ```
+
+``` mvn -N io.takari:maven:0.7.7:wrapper ```
 
 ``` ./mvnw spring-boot:build-image -Dspring-boot.build-image.imageName=springio/gs-spring-boot-docker ```
 
 ``` docker-compose up --build ```
+
+> Running at localhost:8080
 
 ## Show your support ⭐️
 
